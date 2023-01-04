@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - uses: chainalysis/github-workflows/.github/actions/npm-auth@main
-        with:
-          artifactory_token: ${{ secrets.ARTIFACTORY_TOKEN }}
       - name: Install dependencies
         shell: bash
         run: npm install
