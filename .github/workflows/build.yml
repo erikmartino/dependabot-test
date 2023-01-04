@@ -72,5 +72,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5.0.2 # use the explicit version number
         with:
-          build: npm run build
-          start: npm start
+          build: ls build/
+          start: sudo npx serve --ssl-cert ops/cert.pem --ssl-key ops/key.pem -p 443 --no-port-switching  --single build
+        env:
+          CYPRESS_baseUrl: https://localhost
