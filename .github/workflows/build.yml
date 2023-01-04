@@ -1,0 +1,51 @@
+name: typescript-app-build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - uses: chainalysis/github-workflows/.github/actions/npm-auth@main
+        with:
+          artifactory_token: ${{ secrets.ARTIFACTORY_TOKEN }}
+      - name: Install dependencies
+        shell: bash
+        run: npm install
+      - name: Build
+        shell: bash
+        run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: production-build
+          path: build/
+
+  cypress:
+    runs-on: ubuntu-latest
+    needs: [ "build" ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: production-build
+          path: build/
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5.x.x # use the explicit version number
+        with:
+          build: npm run build
+          start: npm start
