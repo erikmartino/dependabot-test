@@ -67,6 +67,7 @@ jobs:
         with:
           name: production-build
           path: build/
+      - run: echo '127.0.0.1    app.example.com' >>/etc/hosts
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
@@ -75,4 +76,4 @@ jobs:
           build: ls build/
           start: /usr/bin/sudo ./node_modules/.bin/serve --ssl-cert ops/cert.pem --ssl-key ops/key.pem --listen tcp://127.0.0.1:443 --no-port-switching --single build
         env:
-          CYPRESS_baseUrl: https://localhost:443
+          CYPRESS_baseUrl: https://app.example.com
