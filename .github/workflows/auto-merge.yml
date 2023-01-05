@@ -7,12 +7,10 @@ permissions:
   contents: write
   pull-requests: write
 
-if: github.event.check_suite.conclusion == 'success' && github.event.check_suite.pull_request
-
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' && github.event.check_suite.pull_request }}
     steps:
       - name: Dependabot metadata
         id: metadata
