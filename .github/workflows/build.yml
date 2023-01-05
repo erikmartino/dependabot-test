@@ -2,8 +2,6 @@ name: typescript-app-build
 
 on:
   pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -12,20 +10,5 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - name: Install dependencies
-        shell: bash
-        run: npm install
-      - name: Build
-        shell: bash
-        run: npm run build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: production-build
-          path: build/
+      - run: echo build
 

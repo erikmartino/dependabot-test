@@ -1,0 +1,9 @@
+name: merge dependabot updates
+on:
+  status:
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo status ${{ github.event.state }}
