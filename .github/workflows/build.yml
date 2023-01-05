@@ -52,28 +52,3 @@ jobs:
           build: npm run build
           start: npm start
 
-  cypress2:
-    runs-on: ubuntu-latest
-    needs: [ "build" ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - uses: actions/download-artifact@v3
-        with:
-          name: production-build
-          path: build/
-      - run: echo '127.0.0.1    app.example.com' | sudo tee -a /etc/hosts
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v5.0.2 # use the explicit version number
-        with:
-          build: ls build/
-          start: /usr/bin/sudo ./node_modules/.bin/serve --ssl-cert ops/cert.pem --ssl-key ops/key.pem --listen tcp://127.0.0.1:443 --no-port-switching --single build
-        env:
-          CYPRESS_baseUrl: https://app.example.com
