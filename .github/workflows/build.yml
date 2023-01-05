@@ -73,6 +73,6 @@ jobs:
         uses: cypress-io/github-action@v5.0.2 # use the explicit version number
         with:
           build: ls build/
-          start: /usr/bin/sudo npx serve --ssl-cert ops/cert.pem --ssl-key ops/key.pem --listen 443 --no-port-switching --single build
+          start: /usr/bin/sudo serve --ssl-cert ops/cert.pem --ssl-key ops/key.pem --listen tcp://127.0.0.1:443 --no-port-switching --single build
         env:
           CYPRESS_baseUrl: https://localhost:443
