@@ -67,7 +67,7 @@ jobs:
         with:
           name: production-build
           path: build/
-      - run: echo '127.0.0.1    app.example.com' >>/etc/hosts
+      - run: echo '127.0.0.1    app.example.com' | sudo tee -a /etc/hosts
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
