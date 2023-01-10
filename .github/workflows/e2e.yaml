@@ -5,7 +5,7 @@ on:
       local:
         description: 'Serve the production build from a local server'
         required: false
-        type: boolean
+        type: string
         default: true
 jobs:
   cypress:
