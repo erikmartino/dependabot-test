@@ -15,9 +15,13 @@ jobs:
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+      # Approves and enable auto merge, Github will then merge when the required checks have succeeded.
       - name: Approve PR
         if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor'}}
-        run: gh pr review --comment --body "Auto approved by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" "$PR_URL" && gh pr review --approve "$PR_URL"
+        run: |
+          comment="Auto approved by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh pr review --comment --body "${comment}" "$PR_URL" && 
+          gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
