@@ -4,7 +4,7 @@ on:
     inputs:
       local:
         description: 'Serve the production build from a local server'
-        required: true
+        required: false
         type: boolean
         default: true
 jobs:
