@@ -11,6 +11,6 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.inputs.local }}
+      - run: echo local=${{ github.event.inputs.local }}
       - run: echo hej
         if: github.event.inputs.local
