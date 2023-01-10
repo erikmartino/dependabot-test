@@ -2,15 +2,15 @@ name: deploy
 on:
   workflow_call:
     inputs:
-      local:
+      foo:
         description: 'Serve the production build from a local server'
-        required: false
+        required: true
         type: string
-        default: true
+        default: 'local'
 jobs:
   cypress:
     runs-on: ubuntu-latest
     steps:
-      - run: echo local=${{ github.event.inputs.local }}
+      - run: echo local=${{ github.event.inputs.foo }}
       - run: echo hej
-        if: ${{ github.event.inputs.local == 'true' }}
+        if: ${{ github.event.inputs.foo == 'local' }}
