@@ -15,5 +15,3 @@ jobs:
     needs: [build]
     uses: ./.github/workflows/e2e.yaml
     secrets: inherit
-    with:
-      local: 'true'
