@@ -12,4 +12,9 @@ jobs:
     steps:
       - run: echo build
       - run: sleep 30
-
+  e2e:
+    needs: [build]
+    uses: ./.github/workflows/cypress.yaml
+    secrets: inherit
+    with:
+      local: true
