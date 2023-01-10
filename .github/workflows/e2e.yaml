@@ -12,4 +12,4 @@ jobs:
     steps:
       - run: echo ${{ github.event.inputs.local }}
       - run: echo hej
-        if: ${{ github.event.inputs.local }}
+        if: github.event.inputs.local
