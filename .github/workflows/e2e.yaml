@@ -6,11 +6,11 @@ on:
         description: 'Serve the production build from a local server'
         required: true
         type: boolean
-        default: true
+        default: 'true'
 jobs:
   cypress:
     runs-on: ubuntu-latest
     steps:
       - run: echo local=${{ github.event.inputs.local }}
       - run: echo hej
-        if: github.event.inputs.local
+        if: ${{ github.event.inputs.local }}
