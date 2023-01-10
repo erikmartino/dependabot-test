@@ -5,12 +5,12 @@ on:
       foo:
         description: 'Serve the production build from a local server'
         required: true
-        type: string
-        default: 'local'
+        type: boolean
+        default: true
 jobs:
   cypress:
     runs-on: ubuntu-latest
     steps:
       - run: echo local=${{ inputs.foo }}
       - run: echo hej
-        if: ${{ inputs.foo == 'local' }}
+        if: ${{ inputs.foo }}
