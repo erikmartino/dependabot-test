@@ -1,0 +1,39 @@
+name: Build and Publish on Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+        echo "VERSION=${GITHUB_REF#refs/tags/}" >>$GITHUB_ENV
+      - name: Authenticate with GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          file: Dockerfile
+          tags: ghcr.io/${{ github.repository }}:${{ env.VERSION }},ghcr.io/${{ github.repository }}:latest
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release notes for ${{ github.ref }}
+          draft: false
+          prerelease: false
