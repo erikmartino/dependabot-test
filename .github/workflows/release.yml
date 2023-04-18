@@ -18,6 +18,8 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        run: echo "build_time=$(date +%Y%m%d%H%M)" >>$GITHUB_ENV
+      -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
@@ -26,7 +28,7 @@ jobs:
             ghcr.io/${{ github.repository }}
           tags: |
             type=ref,event=branch
-            type=ref,event=pr
+            type=ref,event=pr,prefix=pr,suffix=.${{ env.build_time }}
             type=semver,pattern={{version}},event=tag
       -
         name: Build and push
