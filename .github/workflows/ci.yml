@@ -45,3 +45,16 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - 
+        name: Bump version and push tag
+        id: semver_tagging
+        uses: fsfe/gh-action-lightweight-tag@v1
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Added condition
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          type: semver
+          prefix: v
+          dry_run: false
+          commit_message: 'chore(release): Release v%s'
+
+
