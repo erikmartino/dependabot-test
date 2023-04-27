@@ -10,7 +10,7 @@
     "@types/node": "^18.16.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
-    "cypress": "^12.10.0",
+    "cypress": "^12.11.0",
     "http-server": "^14.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
