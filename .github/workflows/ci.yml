@@ -34,8 +34,8 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           tags: |
+            type=edge,branch=main
             type=ref,event=branch
-            type=edge,branch=$repo.default_branch
             type=ref,event=pr,prefix=pr,suffix=.${{ env.build_time }}
             type=semver,pattern={{version}},event=tag
       -
