@@ -34,9 +34,9 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           tags: |
-            type=ref,event=branch,suffix=.${{ env.build_time }}
+            type=ref,event=branch,suffix=-{{date 'YYYYMMDD-HHmmss' }}
             type=ref,event=branch
-            type=ref,event=pr,prefix=pr,suffix=.${{ env.build_time }}
+            type=ref,event=pr,prefix=pr,suffix=.{{date 'YYYYMMDD-HHmmss' }}
             type=semver,pattern={{version}},event=tag
       -
         name: Build and push
