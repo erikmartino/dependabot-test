@@ -1,7 +1,7 @@
 # Getting Started with Dependabot test
 
-This project is for testing Github Action
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is for testing Github Action. Initially
+this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
