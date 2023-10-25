@@ -18,9 +18,9 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         
         git remote add repo-b https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/erikmartino/hello-service.git
-        git fetch
+        git fetch repo-b
         git checkout -b push-me repo-b/main
         date >date.txt
         git add date.txt
         git commit -m "date"
-        git push push-me:push-me repo-b
+        git push repo-b HEAD:push-me
