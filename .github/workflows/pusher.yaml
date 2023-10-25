@@ -16,7 +16,7 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        
+        gh pr list --repo erikmartino/flux-clusters
         git remote add repo-b https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/erikmartino/hello-service.git
         git fetch repo-b
         git checkout -b push-me repo-b/main
