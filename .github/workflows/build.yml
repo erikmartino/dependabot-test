@@ -10,7 +10,7 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - run: echo build
+      - run: env
   e2e:
     needs: [build]
     uses: ./.github/workflows/e2e.yaml
